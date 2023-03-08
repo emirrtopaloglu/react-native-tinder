@@ -1,18 +1,27 @@
 import { Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-
+import { auth } from "../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    const response = await signInWithEmailAndPassword(auth, email, password);
+
+    if (response.user) {
+      navigation.navigate("Home");
+    }
+  };
 
   return (
     <LinearGradient
       colors={["#fd5564", "#ef4a75"]}
-      style={{ flex: 1, justifyContent: "flex-end", paddingBottom: '25%' }}
+      style={{ flex: 1, justifyContent: "flex-end", paddingBottom: "25%" }}
     >
       <SafeAreaView>
         <Text
@@ -44,7 +53,7 @@ const Login = () => {
           secureTextEntry
           textContentType="password"
         />
-        <Button label="Login" />
+        <Button label="Login" onPress={handleLogin} />
         <Text style={{ color: "white", textAlign: "center", marginTop: 20 }}>
           Don't have an account? Sign up
         </Text>
