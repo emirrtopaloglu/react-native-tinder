@@ -1,7 +1,9 @@
-import { Text, SafeAreaView, TextInput, StyleSheet } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
+
 import Input from "../components/Input";
+import Button from "../components/Button";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +12,7 @@ const Login = () => {
   return (
     <LinearGradient
       colors={["#fd5564", "#ef4a75"]}
-      style={{ flex: 1, justifyContent: "flex-end" }}
+      style={{ flex: 1, justifyContent: "flex-end", paddingBottom: '25%' }}
     >
       <SafeAreaView>
         <Text
@@ -42,24 +44,13 @@ const Login = () => {
           secureTextEntry
           textContentType="password"
         />
+        <Button label="Login" />
+        <Text style={{ color: "white", textAlign: "center", marginTop: 20 }}>
+          Don't have an account? Sign up
+        </Text>
       </SafeAreaView>
     </LinearGradient>
   );
 };
 
 export default Login;
-
-const styles = StyleSheet.create({
-  input: {
-    height: 45,
-    backgroundColor: "transparent",
-    marginHorizontal: 20,
-    padding: 15,
-    color: "#fff",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.3)",
-    borderRadius: 8,
-    fontSize: 16,
-    marginBottom: 20,
-  },
-});
