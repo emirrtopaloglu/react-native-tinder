@@ -1,6 +1,6 @@
 import { Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import useAuth from "../hooks/useAuth";
@@ -17,6 +17,14 @@ const Login = ({ navigation }) => {
       navigation.navigate("Home");
     }
   };
+
+  useEffect(() => {
+    signInWithPassword("emir@test.com", "123123123").then((response) => {
+      if (response.user) {
+        navigation.navigate("Home");
+      }
+    });
+  }, []);
 
   return (
     <LinearGradient
