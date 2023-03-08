@@ -1,17 +1,17 @@
 import { Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { auth } from "../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import useAuth from "../hooks/useAuth";
 
 const Login = ({ navigation }) => {
+  const { user, signInWithPassword } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    const response = await signInWithEmailAndPassword(auth, email, password);
+    const response = await signInWithPassword(email, password);
 
     if (response.user) {
       navigation.navigate("Home");
